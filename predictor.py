@@ -82,8 +82,8 @@ if __name__ == "__main__":
 
   model = pred.fit()
 
+#  test_data = [[i, i/3, i] for i in xrange(45000, 45500, 1000)]
   test_data = [[i, i, i] for i in xrange(10000, 16000, 1000)]
-
   predicted_times = pred.predict_all(test_data)
   print
   print "Machines, Predicted Time"
