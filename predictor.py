@@ -44,6 +44,7 @@ class Predictor(object):
         Input test_data should be a list where every element is (input_fraction, machines)
     '''
     test_features = np.array([self._get_features([row[0], row[1], row[2]]) for row in test_data])
+    print test_features
     return test_features.dot(self.model[0])
 
   def fit(self):
@@ -71,7 +72,7 @@ class Predictor(object):
     lr = training_point[0]
     lc = training_point[1]
     rc = training_point[2]
-    return [float(lr*lc),float(lc*rc),float(lr*rc)]
+    return [float(lr),float(lc),float(rc),float(lr*lc),float(lc*rc),float(lr*rc)]
 
 if __name__ == "__main__":
   if len(sys.argv) != 2:
@@ -88,4 +89,4 @@ if __name__ == "__main__":
   print
   print "Machines, Predicted Time"
   for i in xrange(0, len(test_data)):
-    print test_data[i][0], predicted_times[i]
+    print str(test_data[i][0])+'-'+str(test_data[i][1])+'-'+str(test_data[i][2]), predicted_times[i]
