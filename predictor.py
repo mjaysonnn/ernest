@@ -71,8 +71,7 @@ class Predictor(object):
     lr = training_point[0]
     lc = training_point[1]
     rc = training_point[2]
-    return [float(lr*lc),float(lc*rc),float(lr*rc)]
-
+    return [float(lr),float(lc),float(rc),float(lr*lc),float(lc*rc),float(lr*rc),float(lr*lc*rc)]
 if __name__ == "__main__":
   if len(sys.argv) != 2:
     print "Usage <predictor.py> <csv_file_train>"
