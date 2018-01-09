@@ -66,6 +66,8 @@ class Predictor(object):
 
     print "\nx is \n"
     print self.model[0]
+    print
+    # print self.model[1]
     return self.model[0]
 
   def num_examples(self):
@@ -75,8 +77,22 @@ class Predictor(object):
     lr = training_point[0]
     lc = training_point[1]
     rc = training_point[2]
-    return [float(lr+lc+rc),float(lr*lc),float(lc*rc),float(lr*rc)]
-    # return [float(lr),float(lc),float(rc)]
+
+    # return [float(lr),float(lc),float(rc)] # each block size
+
+    # return [float(lr*lc),float(lc*rc),float(lr*rc)]  # only each product
+
+    # return [float(lr*lc),float(lc*rc),float(lr*rc),float(lr*lc+lc*rc)] # shuffle overhead
+
+    # return [float(lr*lc),float(lc*rc),float(lr*rc),float(lr*lc+lc*rc),float(lr*lc*rc)] # compute overhead + shuffle overhead
+
+    # return [float(lr),float(lc),float(rc),float(lr*lc),float(lc*rc),float(lr*rc),float(lr*lc*rc)] # whole cases except shuffle overhead
+
+    # return [float(lr),float(lc),float(rc),float(lr*lc),float(lc*rc),float(lr*rc),float(lr*lc+lc*rc)] # whole cases except shuffle overhead
+
+    return [float(lr),float(lc),float(rc),float(lr*lc),float(lc*rc),float(lr*rc),float(lr*lc+lc*rc),float(lr*lc*rc)] # considering whole cases
+
+
 if __name__ == "__main__":
   if len(sys.argv) != 2:
     print "Usage <predictor.py> <csv_file_train>"
