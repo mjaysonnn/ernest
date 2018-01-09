@@ -44,6 +44,7 @@ class Predictor(object):
         Input test_data should be a list where every element is (input_fraction, machines)
     '''
     test_features = np.array([self._get_features([row[0], row[1], row[2]]) for row in test_data])
+    print
     print test_features
     return test_features.dot(self.model[0])
 
@@ -62,6 +63,8 @@ class Predictor(object):
       training_errors.append(predicted / p[3])
 
     print "Average training error %f%%" % ((np.mean(training_errors) - 1.0)*100.0 )
+
+    print "\nx is \n"
     print self.model[0]
     return self.model[0]
 
@@ -72,8 +75,8 @@ class Predictor(object):
     lr = training_point[0]
     lc = training_point[1]
     rc = training_point[2]
-    return [float(lr),float(lc),float(rc),float(lr*lc),float(lc*rc),float(lr*rc)]
-
+    return [float(lr+lc+rc),float(lr*lc),float(lc*rc),float(lr*rc)]
+    # return [float(lr),float(lc),float(rc)]
 if __name__ == "__main__":
   if len(sys.argv) != 2:
     print "Usage <predictor.py> <csv_file_train>"
